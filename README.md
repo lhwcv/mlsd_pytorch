@@ -18,24 +18,33 @@ origin repo:  https://github.com/navervision/mlsd
 **First figure**: Comparison of M-LSD and existing LSD methods on *GPU*.
 **Second figure**: Inference speed and memory usage on *mobile devices*.
 
-### demo
+## demo
 ![](github/img.png)
 
 
-### How to run demo
-#### Install requirements
+## How to run demo
+### Install requirements
 ```
 pip install -r requirements.txt
 ```
 
-#### Run demo
-```
-python demo_MLSD_flask.py
-```
+### Run demo
+
+The following demo test line detect (simplest):
 
 ```
 python demo.py
 ```
+
+The following demo run with flask in your local: <br/>
+
+```
+python demo_MLSD_flask.py
+```
+you can upload a image the click submit, see what happen.<br/>
+http://0.0.0.0:5000/
+
+
 
 
 
