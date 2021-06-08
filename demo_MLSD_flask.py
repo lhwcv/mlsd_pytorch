@@ -19,7 +19,6 @@ import cv2
 import time
 import argparse
 
-# for tflite
 import numpy as np
 from PIL import Image
 import  torch
@@ -27,6 +26,7 @@ import  torch
 # for square detector
 from utils import pred_squares
 from models.mbv2_mlsd_tiny import  MobileV2_MLSD_Tiny
+from models.mbv2_mlsd_large import  MobileV2_MLSD_Large
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '0' # CPU mode
 
@@ -40,7 +40,8 @@ logger.info('init demo app')
 parser = argparse.ArgumentParser()
 
 ## model parameters
-parser.add_argument('--model_path', default='./models/mlsd_tiny_512_fp32.pth', type=str)
+parser.add_argument('--model_type', default='large', type=str)
+parser.add_argument('--model_dir', default='./models/', type=str)
 parser.add_argument('--input_size', default=512, type=int,
                     help='The size of input images.')
 
@@ -78,18 +79,25 @@ parser.add_argument('--port', default=5000, type=int,
 
 class model_graph:
     def __init__(self, args):
-        self.model = self.load(args.model_path)
+        self.model = self.load(args.model_dir, args.model_type)
         self.params = {'score': args.score_thr,'outside_ratio': args.outside_ratio,'inside_ratio': args.inside_ratio, 
                        'w_overlap': args.w_overlap,'w_degree': args.w_degree,'w_length': args.w_length,
                        'w_area': args.w_area,'w_center': args.w_center}
         self.args = args
 
 
-    def load(self, model_path):
-        torch_model = MobileV2_MLSD_Tiny().cuda().eval()
+    def load(self, model_dir, mode_type):
+        model_path = model_dir +"/mlsd_tiny_512_fp32.pth"
+        if mode_type == 'large':
+            model_path = model_dir +"/mlsd_large_512_fp32.pth"
+            torch_model = MobileV2_MLSD_Large().cuda().eval()
+        else:
+            torch_model = MobileV2_MLSD_Tiny().cuda().eval()
+
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         torch_model.load_state_dict(torch.load(model_path, map_location=device), strict=True)
         self.torch_model = torch_model
+
         return torch_model
 
 

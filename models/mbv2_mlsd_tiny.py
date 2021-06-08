@@ -7,7 +7,7 @@ from  torch.nn import  functional as F
 
 
 class BlockTypeA(nn.Module):
-    def __init__(self, in_c1, in_c2, out_c1, out_c2):
+    def __init__(self, in_c1, in_c2, out_c1, out_c2, upscale = True):
         super(BlockTypeA, self).__init__()
         self.conv1 = nn.Sequential(
             nn.Conv2d(in_c2, out_c2, kernel_size=1),
@@ -19,6 +19,7 @@ class BlockTypeA(nn.Module):
             nn.BatchNorm2d(out_c1),
             nn.ReLU(inplace=True)
         )
+        self.upscale = upscale
 
     def forward(self, a, b):
         b = self.conv1(b)

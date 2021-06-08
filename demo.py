@@ -5,14 +5,20 @@ import cv2
 sys.path.append(os.path.dirname(__file__))
 
 from models.mbv2_mlsd_tiny import  MobileV2_MLSD_Tiny
+from models.mbv2_mlsd_large import  MobileV2_MLSD_Large
+
 from utils import  pred_lines
 
 
 
 def main():
     current_dir = os.path.dirname(__file__)
-    model_path = current_dir+'/models/mlsd_tiny_512_fp32.pth'
-    model = MobileV2_MLSD_Tiny().cuda().eval()
+    # model_path = current_dir+'/models/mlsd_tiny_512_fp32.pth'
+    # model = MobileV2_MLSD_Tiny().cuda().eval()
+
+    model_path = current_dir + '/models/mlsd_large_512_fp32.pth'
+    model = MobileV2_MLSD_Large().cuda().eval()
+
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model.load_state_dict(torch.load(model_path, map_location=device), strict=True)
 
