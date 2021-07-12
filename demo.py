@@ -27,8 +27,7 @@ def main():
 
     img = cv2.imread(img_fn)
     img = cv2.resize(img, (512, 512))
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    lines = pred_lines(img, model, [512, 512], 0.1, 20)
+    lines = pred_lines(cv2.cvtColor(img, cv2.COLOR_BGR2RGB), model, [512, 512], 0.1, 20)
 
     for l in lines:
         cv2.line(img, (int(l[0]), int(l[1])), (int(l[2]), int(l[3])), (200,200,0), 1,16)
