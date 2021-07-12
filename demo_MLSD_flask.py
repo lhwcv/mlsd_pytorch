@@ -32,6 +32,8 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '0' # CPU mode
 
 # flask
 current_dir = os.path.dirname(__file__)
+if current_dir == "":
+    current_dir = "./"
 app = Flask(__name__, template_folder=current_dir+ '/templates/')
 logger = app.logger
 logger.info('init demo app')
