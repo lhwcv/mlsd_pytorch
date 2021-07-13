@@ -2,7 +2,6 @@ import torch
 import os
 import sys
 import cv2
-sys.path.append(os.path.dirname(__file__))
 
 from models.mbv2_mlsd_tiny import  MobileV2_MLSD_Tiny
 from models.mbv2_mlsd_large import  MobileV2_MLSD_Large
@@ -13,6 +12,8 @@ from utils import  pred_lines
 
 def main():
     current_dir = os.path.dirname(__file__)
+    if current_dir == "":
+        current_dir = "./"
     # model_path = current_dir+'/models/mlsd_tiny_512_fp32.pth'
     # model = MobileV2_MLSD_Tiny().cuda().eval()
 
@@ -26,6 +27,7 @@ def main():
 
     img = cv2.imread(img_fn)
     img = cv2.resize(img, (512, 512))
+
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     lines = pred_lines(img, model, [512, 512], 0.1, 20)
     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)

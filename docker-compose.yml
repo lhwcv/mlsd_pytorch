@@ -1,0 +1,15 @@
+version: "2"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mlsd
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=0
+      - NVIDIA_DRIVER_CAPABILITIES=compute
+    volumes:
+      - ${PWD}:/ws
+    working_dir: /ws
+    command: "python demo.py"

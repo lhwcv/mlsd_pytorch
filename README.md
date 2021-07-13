@@ -45,8 +45,33 @@ you can upload a image the click submit, see what happen.<br/>
 http://0.0.0.0:5000/
 
 
+### Run in docker
 
 
+Follow the instructions from <https://docs.docker.com/engine/install/ubuntu>,
+  <https://github.com/NVIDIA/nvidia-container-runtime#docker-engine-setup> and
+  <https://docs.docker.com/compose/install/#install-compose-on-linux-systems> to setup your environment.
+
+- Build the image
+
+```
+docker-compose build
+
+```
+
+- Run the demo
+
+```
+docker-compose up
+
+```
+
+- Run the flask demo
+
+```
+docker-compose -f docker-compose.yml -f docker-compose.flask.yml up
+
+```
 
 ## Citation
 If you find *M-LSD* useful in your project, please consider to cite the following paper.
