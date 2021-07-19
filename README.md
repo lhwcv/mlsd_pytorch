@@ -1,5 +1,22 @@
 # M-LSD: Towards Light-weight and Real-time Line Segment Detection
 
+### update 2021.07.20
+
+We have push our training code in mlsd_pytorch/
+
+[detail](mlsd_pytorch/README.md)
+
+model| img_size| sAP10
+|---|---|:---:| 
+mlsd_tiny (this repo)| 512|  56.4
+mlsd_tiny (in the paper)| 512|  58.0
+mlsd_large (this repo)| 512|  59.6
+mlsd_large (in the paper)| 512|  62.1
+
+(this repo use:  min_score=0.05,  min_len=5, tok_k_lines= 500)
+
+---
+
 Pytorch implementation of *"M-LSD: Towards Light-weight and Real-time Line Segment Detection"* <br/>
 
 origin repo:  https://github.com/navervision/mlsd

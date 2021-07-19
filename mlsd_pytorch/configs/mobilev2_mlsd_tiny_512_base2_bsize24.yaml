@@ -1,0 +1,47 @@
+datasets:
+    name: 'wireframe'
+    input_size: 512
+
+model:
+    model_name: 'mobilev2_mlsd'
+    with_deconv: True
+
+
+train:
+    save_dir:  './workdir/models/mobilev2_mlsd_tiny_512_bsize24/'
+    img_dir:  "./data/wireframe_raw/images/"
+    label_fn: "./data/wireframe_raw/train.json"
+    num_train_epochs: 155
+    batch_size: 24
+    learning_rate: 0.003
+    use_step_lr_policy: True
+    weight_decay: 0.000001
+    load_from: ""
+    warmup_steps: 100
+    milestones: [ 50, 100, 150 ]
+    milestones_in_epo: True
+    lr_decay_gamma: 0.2
+
+    data_cache_dir: "./data/wireframe_cache/"
+    with_cache: False
+    cache_to_mem: False
+
+val:
+    img_dir: "./data/wireframe_raw/images/"
+    label_fn: "./data/wireframe_raw/valid.json"
+    batch_size: 8
+    val_after_epoch: 50
+
+loss:
+    loss_weight_dict_list: [ { 'tp_center_loss': 10.0,'sol_center_loss': 1.0,'tp_match_loss':1.0 } ]
+    
+    with_match_loss: False
+    with_focal_loss: True
+    focal_loss_level: 0
+    with_sol_loss: True
+    match_sap_thresh: 5.0
+
+decode:
+    score_thresh: 0.05
+    len_thresh: 5
+    top_k: 500
