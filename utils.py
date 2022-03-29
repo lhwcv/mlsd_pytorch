@@ -180,7 +180,6 @@ def pred_squares(image,
     acc_map = torch.from_numpy(acc_map_np).unsqueeze(0).unsqueeze(0)
     _,_, h, w = acc_map.shape
     max_acc_map = F.max_pool2d(acc_map,kernel_size=5, stride=1, padding=2)
-    print(max_acc_map.shape)
     acc_map = acc_map * ( (acc_map == max_acc_map).float() )
     flatten_acc_map = acc_map.reshape([-1, ])
 
