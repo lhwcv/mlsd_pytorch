@@ -90,6 +90,35 @@ docker-compose -f docker-compose.yml -f docker-compose.flask.yml up
 
 ```
 
+### TensorRT/ Jetson Device Support
+
+#### Prerequisites
+
+Go ahead and complete installation of NVIDIA's torch2trt library with the following [https://github.com/NVIDIA-AI-IOT/torch2trt](instructions)
+
+### Usage
+
+For simple usage go ahead and dial in the following:
+
+```
+python trt_converter.py --model tiny --conversion fp16 --bench
+```
+All model locations default to `./models/mlsd_{model_type}__512_trt_{conversion}.pth`
+The tool also supports int8 conversion provided that a representative subset of images is is provided as follows:
+
+```
+python trt_converter.py --model tiny --conversion int8 --calibration_data calib-folder
+```
+
+**Note** You may also convert each torch2trt wrapped representation to a standard serialized engine for use with native TensorRT with both the --engine and --serialize arguments.
+
+
+*Tested on a Xavier NX (Jetpack 5), and an AGX Xavier (Jetpack 4)
+
+**Benchmarks pending**
+
+
+
 ## Citation
 If you find *M-LSD* useful in your project, please consider to cite the following paper.
 
