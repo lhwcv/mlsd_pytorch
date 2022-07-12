@@ -96,14 +96,14 @@ docker-compose -f docker-compose.yml -f docker-compose.flask.yml up
 
 Go ahead and complete installation of NVIDIA's torch2trt library with the following [https://github.com/NVIDIA-AI-IOT/torch2trt](instructions)
 
-### Usage
+#### Usage
 
 For simple usage go ahead and dial in the following:
 
 ```
 python trt_converter.py --model tiny --conversion fp16 --bench
 ```
-All model locations default to `./models/mlsd_{model_type}__512_trt_{conversion}.pth`
+All model locations default to `./models/mlsd_{model_type}__512_trt_{conversion}.pth`.
 The tool also supports int8 conversion provided that a representative subset of images is is provided as follows:
 
 ```
