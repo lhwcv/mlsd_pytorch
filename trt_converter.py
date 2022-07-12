@@ -13,7 +13,6 @@ except ImportError:
 import tensorrt as trt 
 
 from torch.nn import  functional as F
-from pytorch_benchmark import benchmark
 
 from models.mbv2_mlsd_tiny import  MobileV2_MLSD_Tiny
 from models.mbv2_mlsd_large import  MobileV2_MLSD_Large
