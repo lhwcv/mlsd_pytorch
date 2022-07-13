@@ -120,6 +120,7 @@ python trt_converter.py --model tiny --conversion int8 --calibration_data calib-
 
 **Note** You may also convert each torch2trt wrapped representation to a standard serialized engine for use with native TensorRT with both the --engine and --serialize arguments.
 
+#### Benchmarks
 
 Device| Raw FPS| Speed (ms)
 |---|---|:---:| 
