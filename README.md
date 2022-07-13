@@ -121,9 +121,15 @@ python trt_converter.py --model tiny --conversion int8 --calibration_data calib-
 **Note** You may also convert each torch2trt wrapped representation to a standard serialized engine for use with native TensorRT with both the --engine and --serialize arguments.
 
 
-*Tested on a Xavier NX (Jetpack 5.0.1 - developer preview), and an AGX Xavier (Jetpack 4.6.1)
+Device| Raw FPS| Speed (ms)
+|---|---|:---:| 
+Xavier NX - FP16| 134 |  7.35
+Xavier NX - int8| 238 |  4.13
+AGX Xavier - FP16 | 280 |  3.53
+AGX Xavier - int8 | 451 |  2.18
 
-**Benchmarks pending**
+
+*Tested on a Xavier NX Developer Kit(Jetpack 5.0.1 - developer preview), and an AGX Xavier Developer Kit (Jetpack 4.6.1)
 
 
 
