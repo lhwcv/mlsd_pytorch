@@ -184,7 +184,7 @@ def pred_squares(image,
     flatten_acc_map = acc_map.reshape([-1, ])
 
     scores, indices = torch.topk(flatten_acc_map, len(pts), dim=-1, largest=True)
-    yy = torch.floor_divide(indices, w).unsqueeze(-1)
+    yy = torch.div(indices, w, rounding_mode='floor').unsqueeze(-1)
     xx = torch.fmod(indices, w).unsqueeze(-1)
     yx = torch.cat((yy, xx), dim=-1)
 

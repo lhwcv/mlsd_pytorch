@@ -90,6 +90,50 @@ docker-compose -f docker-compose.yml -f docker-compose.flask.yml up
 
 ```
 
+### TensorRT/ Jetson Device Support
+
+#### Prerequisites
+
+Go ahead and complete installation of NVIDIA's torch2trt library with the following [instructions](https://github.com/NVIDIA-AI-IOT/torch2trt), ensuring that a compatible CUDA compiled torch wheel is available first. For instance:
+
+```
+#Jetpack 4.6.1
+export TORCH_INSTALL=https://developer.download.nvidia.com/compute/redist/jp/v461/pytorch/torch-1.11.0a0+17540c5+nv22.01-cp36-cp36m-linux_aarch64.whl
+
+python3 -m pip install --upgrade pip; python3 -m pip install expecttest xmlrunner hypothesis aiohttp numpy=='1.19.4' pyyaml scipy=='1.5.3' ninja cython typing_extensions protobuf; export "LD_LIBRARY_PATH=/usr/lib/llvm-8/lib:$LD_LIBRARY_PATH"; python3 -m pip install --upgrade protobuf; python3 -m pip install --no-cache $TORCH_INSTALL
+
+```
+
+#### Usage
+
+For simple usage go ahead and dial in the following:
+
+```
+python trt_converter.py --model tiny --conversion fp16 --bench
+```
+All model locations default to `./models/mlsd_{model_type}__512_trt_{conversion}.pth`.
+The tool also supports int8 conversion provided that a representative subset of images is is provided as follows:
+
+```
+python trt_converter.py --model tiny --conversion int8 --calibration_data calib-folder
+```
+
+**Note** You may also convert each torch2trt wrapped representation to a standard serialized engine for use with native TensorRT with both the --engine and --serialize arguments.
+
+#### Benchmarks
+
+Device| Raw FPS| Speed (ms)
+|---|---|:---:| 
+Xavier NX - FP16| 134 |  7.35
+Xavier NX - int8| 238 |  4.13
+AGX Xavier - FP16 | 280 |  3.53
+AGX Xavier - int8 | 451 |  2.18
+
+
+*Tested on a Xavier NX Developer Kit(Jetpack 5.0.1 - developer preview), and an AGX Xavier Developer Kit (Jetpack 4.6.1)
+
+
+
 ## Citation
 If you find *M-LSD* useful in your project, please consider to cite the following paper.
 
