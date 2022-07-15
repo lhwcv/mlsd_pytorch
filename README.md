@@ -93,8 +93,9 @@ docker-compose -f docker-compose.yml -f docker-compose.flask.yml up
 ### TensorRT/ Jetson Device Support
 
 #### Prerequisites
+https://github.com/NVIDIA-AI-IOT/torch2trt
 
-Go ahead and complete installation of NVIDIA's torch2trt library with the following [https://github.com/NVIDIA-AI-IOT/torch2trt](instructions), ensuring that a compatible CUDA compiled torch wheel is available first. For instance:
+Go ahead and complete installation of NVIDIA's torch2trt library with the following [instructions](https://github.com/NVIDIA-AI-IOT/torch2trt), ensuring that a compatible CUDA compiled torch wheel is available first. For instance:
 
 ```
 #Jetpack 4.6.1
