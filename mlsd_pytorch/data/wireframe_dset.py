@@ -36,8 +36,8 @@ def parse_label_file_info(img_dir, label_file):
         w = c['width']
         h = c['height']
         lines = c['lines']
-        fn = c['filename'][:-4]+'.png'
-        full_fn = img_dir + '/'+fn
+        fn = c['filename'][:-4]+'.jpg'
+        full_fn = img_dir + fn
         assert os.path.exists(full_fn), full_fn
 
         json_content = {
