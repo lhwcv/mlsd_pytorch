@@ -51,7 +51,7 @@ def pred_lines(image, model,
     h, w, _ = image.shape
     h_ratio, w_ratio = [h / input_shape[0], w / input_shape[1]]
 
-    resized_image = np.concatenate([cv2.resize(image, (input_shape[0], input_shape[1]), interpolation=cv2.INTER_AREA),
+    resized_image = np.concatenate([cv2.resize(image, (input_shape[1], input_shape[0]), interpolation=cv2.INTER_AREA),
                                     np.ones([input_shape[0], input_shape[1], 1])], axis=-1)
 
     resized_image = resized_image.transpose((2,0,1))
@@ -103,7 +103,7 @@ def pred_squares(image,
     h, w, _ = image.shape
     original_shape = [h, w]
 
-    resized_image = np.concatenate([cv2.resize(image, (input_shape[0], input_shape[1]), interpolation=cv2.INTER_AREA),
+    resized_image = np.concatenate([cv2.resize(image, (input_shape[1], input_shape[0]), interpolation=cv2.INTER_AREA),
                                     np.ones([input_shape[0], input_shape[1], 1])], axis=-1)
     resized_image = resized_image.transpose((2, 0, 1))
     batch_image = np.expand_dims(resized_image, axis=0).astype('float32')
